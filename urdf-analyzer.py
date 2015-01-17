@@ -235,31 +235,30 @@ for i in range(0,N):
                         ap = Wnext.ap
                         bp = Wnext.bp
                         connectorWtoWnext = WalkableSurface(ap,bp,binter.A, binter.b, Wnext.iObject)
-                        connector.append(connectorWtoWnext)
+                        connector.append([connectorWtoWnext,i,j])
 
                         ### create upper body connectors
                         upperBodyConnectorStack = []
 
                         Nk = min(len(Wstack),len(WstackNext))
-                        for j in range(0,XSPACE_DIMENSION):
-                                if j < Nk:
-                                        Winter = Wstack[j][0].intersectWithPolytope(WstackNext[j][0])
+                        for p in range(0,XSPACE_DIMENSION):
+                                if p < Nk:
+                                        Winter = Wstack[p][0].intersectWithPolytope(WstackNext[p][0])
                                         d = maxDistanceBetweenVertices(Winter.getVertexRepresentation())
-                                        print i,"box",d
                                         if d>0.1:
                                                 upperBodyConnectorStack.append(Winter)
                                         else:
-                                                Whelper = connectorWtoWnext.createTinyHelperBox(j*VSTACK_DELTA,(j+1)*VSTACK_DELTA)
+                                                Whelper = connectorWtoWnext.createTinyHelperBox(p*VSTACK_DELTA,(p+1)*VSTACK_DELTA)
                                                 upperBodyConnectorStack.append(Whelper)
-                                                Nk=j
+                                                Nk=p
                                 else:
                                         ## create helper box for higher dimensions (the small
                                         ## boxes which contain only 1 point
-                                        Whelper = connectorWtoWnext.createTinyHelperBox(j*VSTACK_DELTA,(j+1)*VSTACK_DELTA)
+                                        Whelper = connectorWtoWnext.createTinyHelperBox(p*VSTACK_DELTA,(p+1)*VSTACK_DELTA)
                                         upperBodyConnectorStack.append(Whelper)
 
                         print "formed connector between WS",i,"and",j,"(has",Nk,"layers)"
-                        upperBodyConnector.append([upperBodyConnectorStack,Nk])
+                        upperBodyConnector.append([upperBodyConnectorStack,Nk,i,j])
 
 
 ###############################################################################
