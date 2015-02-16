@@ -30,12 +30,10 @@ import sys
 from robot.robotspecifications import *
 
 start = timer()
-## minimal distance between walkable surfaces, such that we consider them
-## connected
-MIN_DISTANCE_WALKABLE_SURFACES=0.01
 
 #env_fname = "urdf/wall_simplified.urdf"
-env_fname = "urdf/wall.urdf"
+#env_fname = "urdf/wall.urdf"
+env_fname = "urdf/staircase_stones.urdf"
 
 ###############################################################################
 pobjects = URDFtoPolytopes(env_fname)
@@ -87,20 +85,20 @@ N = len(Wsurfaces_decomposed)
 
 WD = np.zeros((N,N))
 WM = np.zeros((N,N))
+
+G_S = nx.Graph()
 for i in range(0,N):
+        G_S.add_edge(i,i)
         for j in range(i+1,N):
                 WD[i,j]=WD[j,i]=distanceWalkableSurfaceWalkableSurface(\
                                 Wsurfaces_decomposed[i], \
                                 Wsurfaces_decomposed[j])
                 WM[i,j]=WM[j,i]=(0 if WD[i,j]>MIN_DISTANCE_WALKABLE_SURFACES else 1)
+                if WM[i,j]>0:
+                        G_S.add_edge(i,j)
 
         WM[i,i]=1
 
-G_S = nx.Graph()
-for i in range(0,N):
-        for j in range(i+1,N):
-                if WD[i,j]<=0.01:
-                        G_S.add_edge(i,j)
 
 for i in range(0,N):
         print "WS",i,"has neighbors:",G_S.neighbors(i)
