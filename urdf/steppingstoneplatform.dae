@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+    <asset>
+        <contributor>
+            <author>O. Stasse</author>
+            <authoring_tool>Emacs</authoring_tool>
+        </contributor>
+        <up_axis>Z_UP</up_axis>
+        <created>Sat Dec 27 7:53:00 2014</created>
+     </asset>
+    <library_images/>
+    <library_effects>
+      <effect id="Material-effect">
+        <profile_COMMON>
+          <technique sid="common">
+            <lambert>
+              <emission>
+                <color>0 0 0 1</color>
+              </emission>
+              <ambient>
+                <color>0 0 0 1</color>
+              </ambient>
+              <diffuse>
+                <color>1.0 0.0 0.0 1</color>
+              </diffuse>
+              <reflective>
+                <color>0 0 0 1</color>
+              </reflective>
+              <reflectivity>
+                <float>0</float>
+              </reflectivity>
+              <transparent>
+                <color>0 0 0 1</color>
+              </transparent>
+              <transparency>
+                <float>1</float>
+              </transparency>
+              <index_of_refraction>
+                <float>1</float>
+              </index_of_refraction>
+            </lambert>
+          </technique>
+        </profile_COMMON>
+      </effect>
+    </library_effects>
+    <library_materials>
+      <material id="Material">
+        <instance_effect url="#Material-effect"/>
+      </material>
+    </library_materials>
+    <library_geometries>
+       <geometry id="FinalPlatform-mesh">
+        <mesh>
+        <source id="FinalPlatform-mesh-positions">
+          <float_array id="FinalPlatform-mesh-positions-array" count="36">
+          0.68 -0.34 0.0 
+          0.68  0.34 0.0 
+          0.17  0.34 0.0 
+          0.17  0.0 0.0  
+          0.0   0.0 0.0
+          0.0  -0.34 0.0
+          0.68 -0.34 0.05 
+          0.68  0.34 0.05 
+          0.17  0.34 0.05 
+          0.17  0.0 0.05  
+          0.0   0.0 0.05
+          0.0  -0.34 0.05
+          </float_array>
+          <technique_common>
+            <accessor source="#FinalPlatform-mesh-positions-array" count="12" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="FinalPlatform-mesh-vertices">
+          <input semantic="POSITION" source="#FinalPlatform-mesh-positions"/>
+        </vertices>
+        <polylist material="Material" count="8">
+          <input semantic="VERTEX" source="#FinalPlatform-mesh-vertices" offset="0"/>
+          <vcount>6 6 4 4 4 4 4 4</vcount>
+          <p>   
+          6 7 8 9 10 11    
+          0 5 4 3 2 1
+          0 1 7 6
+          8 7 1 2
+          3 9 8 2
+          4 10 9 3
+          5 11 10 4
+          0 6 11 5
+          </p>
+        </polylist>
+      </mesh>
+      </geometry>
+    </library_geometries>
+    <library_visual_scenes>
+        <visual_scene id="VisualSceneNode" name="VisualScene">
+            <node id="stair1" name="node">
+              <scale sid="scale">1 1 1</scale>
+                <instance_geometry url="#FinalPlatform-mesh">
+                    <bind_material>
+                        <technique_common>
+                          <instance_material symbol="Material" target="#Material"/>
+                        </technique_common>    
+                    </bind_material>
+                </instance_geometry>
+            </node>
+        </visual_scene>
+    </library_visual_scenes>
+    <scene>
+        <instance_visual_scene url="#VisualSceneNode"/>
+    </scene>
+</COLLADA>

@@ -47,14 +47,15 @@ def walkableSurfacesPlotter(env_fname):
 
         plot.set_view(59,56)
         plot.ax.set_aspect('equal', 'datalim')
-        plot.ax.set_xlim(-4, 4)
-        plot.ax.set_ylim(0, 10)
-        plot.ax.set_zlim(0, 3)
-
-        plot.point([0,0,2.2],color=COLOR_START_POINT)
-        plot.point([0,8,2.2],color=COLOR_START_POINT)
+        #plot.ax.set_xlim(-4, 4)
+        #lot.ax.set_ylim(0, 10)
+        #lot.ax.set_zlim(0, 3)
+        #lot.point([0,0,2.2],color=COLOR_START_POINT)
+        #lot.point([0,8,2.2],color=COLOR_START_POINT)
 
         plot.fig.show()
+
+
 if __name__ == "__main__":
         folder = os.environ["MPP_PATH"]+"mpp-environment/urdf/"
         #env_fname = folder+"staircase_stones.urdf"
