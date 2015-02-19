@@ -3546,4 +3546,27 @@
     <child link="box145"/>
   </joint>
 
+  <link name="box146">
+    <visual>
+      <geometry>
+        <box size="0.170000 0.405009 0.050500"/>
+      </geometry>
+    <origin rpy="0 0 0" xyz="-0.953396 0.001900 0.25"/>
+    <material name="wall_colored">
+      <color rgba="1.000000 0.188235 0.003922 1.000000"/>
+    </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.270000 0.405009 0.250500"/>
+      </geometry>
+    <origin rpy="0 0 0" xyz="-0.853396 0.001900 0.15"/>
+    </collision>
+  </link>
+
+  <joint name="base_to_box146" type="fixed">
+    <parent link="base_link"/>
+    <child link="box146"/>
+  </joint>
+
 </robot>

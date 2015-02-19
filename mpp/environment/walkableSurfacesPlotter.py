@@ -31,7 +31,8 @@ def walkableSurfacesPlotter(env_fname):
         print " >> Objects:",len(pobjects)
         print "================================================================"
 
-        wsurfaces = WalkableSurfacesFromPolytopes(pobjects)
+        output_folder = os.environ["MPP_PATH"]+"mpp-environment/output/"
+        wsurfaces = pickle.load( open( output_folder+"/wsurfaces.dat", "rb" ) )
 
         plot=Plotter()
 
