@@ -8,6 +8,7 @@ sys.path.append(os.environ["MPP_PATH"]+"mpp-environment/mpp")
 
 from mathtools.polytope import Polytope
 from mathtools.walkable import *
+from environment.clipWalkableSurfaces import *
 from environment.urdfparser import URDFtoPolytopes
 from mathtools.linalg import *
 from mathtools.timer import * 
@@ -20,7 +21,7 @@ import sys
 from robot.robotspecifications import *
 
 
-def computeWalkableSurfaceConnectivity(env_fname):
+def computeWalkableSurfaceConnectivity(env_fname, clipper=True):
 
         time = np.zeros((2,1))
         ###############################################################################
@@ -30,29 +31,9 @@ def computeWalkableSurfaceConnectivity(env_fname):
 
         wsurfaces = WalkableSurfacesFromPolytopes(pobjects)
 
+        if clipper:
+                wsurfaces = clipWalkableSurfaces(wsurfaces, pobjects)
 
-        ###############################################################################
-        # Project Objects in footBox down, create clipped surfaces
-        ###############################################################################
-        footBoxCandidate=[]
-        for i in range(0,len(wsurfaces)):
-                footBoxCandidate.append(wsurfaces[i].createBox(0.01, ROBOT_FOOT_HEIGHT))
-
-        Wsurfaces_decomposed= []
-        for i in range(0,len(wsurfaces)):
-                ap = wsurfaces[i].ap
-                bp = wsurfaces[i].bp
-                iObject = wsurfaces[i].iObject
-                p = ProjectPolytopesDownInsideBox(pobjects, wsurfaces[i],\
-                                footBoxCandidate[i])
-                for j in range(0,len(p)):
-                        Wsplit = WalkableSurface.fromVertices(ap,bp,p[j],iObject)
-                        Wsurfaces_decomposed.append(Wsplit)
-
-        print "splitted",len(wsurfaces),"walkable surfaces into",\
-                        len(Wsurfaces_decomposed),"(reasoning about foot placement)"
-        print "======================================================================="
-        wsurfaces = Wsurfaces_decomposed
         timer.stop()
         time[0] = timer.getTime()
 

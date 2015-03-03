@@ -32,8 +32,8 @@ from robot.robotspecifications import *
 start = timer()
 
 #env_fname = "urdf/wall_simplified.urdf"
-#env_fname = "urdf/wall.urdf"
-env_fname = "urdf/staircase_stones.urdf"
+env_fname = "urdf/wall-extension.urdf"
+#env_fname = "urdf/staircase_stones.urdf"
 
 ###############################################################################
 pobjects = URDFtoPolytopes(env_fname)
@@ -88,7 +88,6 @@ WM = np.zeros((N,N))
 
 G_S = nx.Graph()
 for i in range(0,N):
-        G_S.add_edge(i,i)
         for j in range(i+1,N):
                 WD[i,j]=WD[j,i]=distanceWalkableSurfaceWalkableSurface(\
                                 Wsurfaces_decomposed[i], \
