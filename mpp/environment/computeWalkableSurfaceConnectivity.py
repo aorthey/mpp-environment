@@ -9,7 +9,7 @@ sys.path.append(os.environ["MPP_PATH"]+"mpp-environment/mpp")
 from mathtools.polytope import Polytope
 from mathtools.walkable import *
 from environment.clipWalkableSurfaces import *
-from environment.urdfparser import URDFtoPolytopes
+from environment.fileparser import fileToPolytopes
 from mathtools.linalg import *
 from mathtools.timer import * 
 from scipy.spatial import ConvexHull
@@ -20,14 +20,13 @@ import sys
 ###############################################################################
 from robot.robotspecifications import *
 
-
 def computeWalkableSurfaceConnectivity(env_fname, clipper=True):
 
         time = np.zeros((2,1))
         ###############################################################################
         timer = Timer("building free space decomposition")
         print env_fname
-        pobjects = URDFtoPolytopes(env_fname)
+        pobjects = fileToPolytopes(env_fname)
 
         wsurfaces = WalkableSurfacesFromPolytopes(pobjects)
 

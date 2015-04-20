@@ -9,7 +9,7 @@ sys.path.append(os.environ["MPP_PATH"]+"mpp-environment/mpp")
 from mathtools.timer import Timer
 from mathtools.polytope import Polytope
 from mathtools.walkable import *
-from environment.urdfparser import URDFtoPolytopes
+from environment.fileparser import fileToPolytopes
 from mathtools.linalg import *
 from mathtools.plotter import Plotter
 
@@ -48,7 +48,7 @@ def walkableSurfacesPlotter2(plot, wsurfaces):
 
 def walkableSurfacesPlotter(env_fname, plotscene=True):
         timer = Timer()
-        pobjects = URDFtoPolytopes(env_fname)
+        pobjects = fileToPolytopes(env_fname)
 
         print "================================================================"
         print "Loaded environment",env_fname
