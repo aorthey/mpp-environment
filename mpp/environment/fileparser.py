@@ -8,7 +8,6 @@ sys.path.append(os.environ["MPP_PATH"]+"mpp-environment/mpp")
 from environment.sdfparser import SDFtoPolytopes
 from environment.daeparser import DAEtoPolytopes
 from environment.urdfparser import URDFtoPolytopes
-from environment.scenePlotter import *
 
 def fileToPolytopes(env_fname):
         ##analyse file extension
@@ -39,6 +38,6 @@ if __name__ == "__main__":
         env_fname = folder+"drc/meshes/cinder_block_wide.dae"
         obj = fileToPolytopes(env_fname)
 
-        plot=Plotter()
-        scenePlotterObjects(plot,obj)
-        plot.show()
+        #plot=Plotter()
+        #scenePlotterObjects(plot,obj)
+        #plot.show()
