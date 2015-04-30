@@ -54,6 +54,11 @@ if __name__ == "__main__":
         folder = os.environ["MPP_PATH"]+"mpp-environment/urdf/"
         #env_fname = folder+"staircase_stones.urdf"
         env_fname = folder+"quatro_homotopy.urdf"
+        env_fname = folder+"ompl/pipedream_env.dae"
+        env_fname = folder+"koroibot_stair_cases/meshes/stairplatform_v2.dae"
+        #env_fname = folder+"ompl/pipedream_env.dae"
+        env_fname = folder+"ompl/Easy_env.dae"
+        env_fname = folder+"ompl/Abstract_env.dae"
 
         plot=Plotter()
         scenePlotter(plot,env_fname)
